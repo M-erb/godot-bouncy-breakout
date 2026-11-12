@@ -1,0 +1,84 @@
+extends Node
+
+var lives := 3
+var isGameOver := false
+var lvlIndex := 0
+
+const loseMsgs: Array[String] = [
+	'Come on!',
+	'You can do it!',
+	'Ooof, not good',
+	'Close one!',
+	'Woof...',
+	'What was that??',
+	'I believe in you!',
+	'...Okay...',
+	'Yay, an attempt!',
+	'Really good try',
+	'Do better',
+	';-P',
+	'Don\'t give up!'
+]
+
+const lvls := [
+	[
+		'---------',
+		'---------',
+		'BBBOOBBBB',
+		'OOOBBBOOO',
+		'BBBBBBBBB',
+		'---------',
+		'---------',
+		'---------',
+	],
+	[
+		'---------',
+		'---------',
+		'BBBOOBBBB',
+		'OOOOOOOOO',
+		'OOHBOBHOO',
+		'---------',
+		'---------',
+		'---------',
+	],
+	[
+		'--OOOOO--',
+		'O-----OOO',
+		'HHHOOBHHH',
+		'OOOOOOOOO',
+		'OOHBOBHOO',
+		'OOOOHHOOO',
+		'OOHHB--OO',
+		'--OBBOO--',
+	],
+	[
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOBBOOOO',
+	],
+	[
+		'---------',
+		'---------',
+		'---------',
+		'----BBO--',
+		'----B----',
+		'---------',
+		'---------',
+		'---------',
+	],
+	[
+		'BBBBBBBBB',
+		'BBBBBBBBB',
+		'BBBBBBBBB',
+		'BBBBOBBBB',
+		'BBBBBBBBB',
+		'BBBBBBBBB',
+		'BOOOBOOOB',
+		'BBBBBBBBB',
+	]
+]

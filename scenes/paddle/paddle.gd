@@ -1,0 +1,5 @@
+class_name Paddle extends AnimatableBody2D
+
+
+func _physics_process(delta: float) -> void:
+	position.x = clampf(get_global_mouse_position().x, 16, 184)
