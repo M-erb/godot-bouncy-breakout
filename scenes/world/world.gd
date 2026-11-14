@@ -37,6 +37,12 @@ func handleShowMssg(txt: String, color: Color = Color('#f7aef3')) -> Signal:
 	return animation.animation_finished
 
 func handleLvlCleared() -> void:
-	ball.dock()
+	ball.hideMe()
+	
 	await handleShowMssg('Cleared!', Color(0.098, 0.769, 0.098, 1.0))
-	lvl.generateLvl()
+	
+	if Global.isWin():
+		handleShowMssg('You Win!', Color(0.098, 0.769, 0.098, 1.0))
+	else:
+		lvl.generateLvl()
+		ball.dock()

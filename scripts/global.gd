@@ -82,3 +82,8 @@ const lvls := [
 		'BBBBBBBBB',
 	]
 ]
+
+var lastLvlIndex := lvls.size() - 1
+
+func isWin() -> bool:
+	return lvlIndex > lastLvlIndex
