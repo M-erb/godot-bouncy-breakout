@@ -1,14 +1,14 @@
 class_name Ball extends CharacterBody2D
 
 @export var paddle: Paddle
-@export var speed: float = 120.0
+@export var speed: float = 130.0
+@export var minAngle: float = 0.8
 
 enum States {Docked, Flying, Hidden}
 var state: States = States.Docked
 
 func _ready() -> void:
-	var direction: Vector2 = Vector2(randf_range(-1, 1), -1).normalized()
-	velocity = direction * speed
+	setVelocity()
 
 func _physics_process(delta: float) -> void:
 	if state == States.Flying:
@@ -19,6 +19,12 @@ func _physics_process(delta: float) -> void:
 	
 	if state == States.Hidden:
 		handleHide()
+
+func setVelocity() -> void:
+	var x: float = randf_range(-1, 1) if isTemp else 0
+	var y: float = randf_range(-1, 1) if isTemp else -1
+	var direction: Vector2 = Vector2(x, y).normalized()
+	velocity = direction * speed
 
 func dock() -> void:
 	state = States.Docked
@@ -54,9 +60,21 @@ func handleFly(delta: float) -> void:
 		if collider is Brick:
 			var brick: Brick = collider
 			brick.takeDamage()
+			velocity = velocity.bounce(objNormal)
+			fixShallowAngle()
+			return
 		
 		# if no rules then just bounce normally
 		velocity = velocity.bounce(objNormal)
+
+func fixShallowAngle() -> void:
+	var direction := velocity.normalized()
+	if direction.y > 0 and direction.y < minAngle:
+		direction.y = minAngle
+	elif direction.y < 0 and direction.y > -minAngle:
+		direction.y = -minAngle
+	
+	velocity = direction * speed
 
 func getVelFromPaddle(paddle: Paddle) -> Vector2:
 	var paddingHalfWidth := 16
