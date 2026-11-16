@@ -22,12 +22,32 @@ const loseMsgs: Array[String] = [
 
 const lvls := [
 	[
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+		'SSSSSSSSS',
+	],
+	[
+		'OO-----OO',
+		'---------',
+		'BBBOOBBBB',
+		'OOOBBBOOO',
+		'OOO---OOO',
+		'BHO--SOO-',
+		'---------',
+		'OO-----OO',
+	],
+	[
 		'---------',
 		'---------',
 		'BBBOOBBBB',
 		'OOOBBBOOO',
 		'BBBBBBBBB',
-		'---------',
+		'----S----',
 		'---------',
 		'---------',
 	],
