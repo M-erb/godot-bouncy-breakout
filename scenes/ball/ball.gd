@@ -3,12 +3,16 @@ class_name Ball extends CharacterBody2D
 @export var paddle: Paddle
 @export var speed: float = 130.0
 @export var minAngle: float = 0.8
+@export var isTemp: bool = false
 
 enum States {Docked, Flying, Hidden}
 var state: States = States.Docked
 
 func _ready() -> void:
 	setVelocity()
+	
+	if isTemp:
+		self.modulate = Color('#009243')
 
 func _physics_process(delta: float) -> void:
 	if state == States.Flying:
@@ -51,6 +55,9 @@ func handleFly(delta: float) -> void:
 	if collision != null:
 		var collider := collision.get_collider()
 		var objNormal: Vector2 = collision.get_normal()
+		
+		#if collider is Ball:
+			#return
 		
 		if collider is Paddle: 
 			var paddle: Paddle = collider

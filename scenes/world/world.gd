@@ -12,7 +12,7 @@ func _ready() -> void:
 	if lvl: lvl.lvlCleared.connect(handleLvlCleared)
 
 func onBottomEntered(body: Node2D) -> void:
-	if body is Ball:
+	if body is Ball and !body.isTemp:
 		Global.lives -= 1
 		livesUI.updateLives()
 		
@@ -41,8 +41,19 @@ func handleLvlCleared() -> void:
 	
 	await handleShowMssg('Cleared!', Color(0.098, 0.769, 0.098, 1.0))
 	
+	# remove all temp balls
+	cleanupBalls()
+	
 	if Global.isWin():
 		handleShowMssg('You Win!', Color(0.098, 0.769, 0.098, 1.0))
 	else:
 		lvl.generateLvl()
 		ball.dock()
+
+func cleanupBalls() -> void:
+	var objs := find_children('*', 'Ball', true, false)
+	for obj in objs:
+		if obj is Ball:
+			var ball: Ball = obj
+			if ball.isTemp:
+				ball.queue_free()
