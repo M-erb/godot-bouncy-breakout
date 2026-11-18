@@ -3,6 +3,7 @@ extends Node
 var lives := 3
 var isGameOver := false
 var lvlIndex := 0
+var score := 0
 
 const loseMsgs: Array[String] = [
 	'Come on!',
@@ -47,9 +48,9 @@ const lvls := [
 		'BBBOOBBBB',
 		'OOOBBBOOO',
 		'BBBBBBBBB',
+		'---------',
+		'---------',
 		'----S----',
-		'---------',
-		'---------',
 	],
 	[
 		'---------',
@@ -76,7 +77,7 @@ const lvls := [
 		'OOOOOOOOO',
 		'OOOOOOOOO',
 		'OOOOOOOOO',
-		'OOOOOOOOO',
+		'OOOOSOOOO',
 		'OOOOOOOOO',
 		'OOOOOOOOO',
 		'OOOBBOOOO',
@@ -84,7 +85,7 @@ const lvls := [
 	[
 		'---------',
 		'---------',
-		'---------',
+		'-S-------',
 		'----BBO--',
 		'----B----',
 		'---------',
@@ -100,6 +101,26 @@ const lvls := [
 		'BBBBBBBBB',
 		'BOOOBOOOB',
 		'BBBBBBBBB',
+	],
+		[
+		'---------',
+		'---------',
+		'-S-------',
+		'----BBO--',
+		'----B----',
+		'---------',
+		'---------',
+		'---------',
+	],
+	[
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOOSOOOO',
+		'OOOOOOOOO',
+		'OOOOOOOOO',
+		'OOOBBOOOO',
 	]
 ]
 

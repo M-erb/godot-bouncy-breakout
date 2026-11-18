@@ -3,8 +3,8 @@ class_name LivesUI extends Control
 var ballRef := preload("res://scenes/ui/ball_display.tscn")
 var ballList: Array[Node2D] = []
 const TopRightPos := Vector2(180, 10)
-const HORZ := 145
-const VERT := 1
+const HORZ := 148
+const VERT := -2
 
 func _ready() -> void:
 	updateLives()

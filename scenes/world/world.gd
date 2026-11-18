@@ -6,12 +6,19 @@ class_name World extends Node2D
 @export var mssgLabel: Label
 @export var lvl: Level
 @export var livesUI: LivesUI
+@export var lvlLabel: Label
+@export var scoreLabel: Label
 @export var bgMusic: AudioStreamPlayer
 
 func _ready() -> void:
 	if Bottom: Bottom.body_entered.connect(onBottomEntered)
+	if lvl:
+		lvl.lvlCleared.connect(handleLvlCleared)
+		lvl.scoreUpdate.connect(updateScoreDisplay)
 	if bgMusic:
 		bgMusic.play()
+	
+	updateLvlDisplay()
 
 func onBottomEntered(body: Node2D) -> void:
 	if body is Ball and !body.isTemp:
@@ -40,11 +47,12 @@ func handleShowMssg(txt: String, color: Color = Color('#f7aef3')) -> Signal:
 
 func handleLvlCleared() -> void:
 	ball.hideMe()
+	updateLvlDisplay()
 	
 	await handleShowMssg('Cleared!', Color(0.098, 0.769, 0.098, 1.0))
 	
 	# remove all temp balls
-	cleanupBalls()
+	#cleanupBalls()
 	
 	if Global.isWin():
 		handleShowMssg('You Win!', Color(0.098, 0.769, 0.098, 1.0))
@@ -52,10 +60,10 @@ func handleLvlCleared() -> void:
 		lvl.generateLvl()
 		ball.dock()
 
-func cleanupBalls() -> void:
-	var objs := find_children('*', 'Ball', true, false)
-	for obj in objs:
-		if obj is Ball:
-			var ball: Ball = obj
-			if ball.isTemp:
-				ball.queue_free()
+func updateLvlDisplay() -> void:
+	const label = 'lvl: '
+	lvlLabel.text = label + str(Global.lvlIndex + 1) + '/' + str(Global.lvls.size())
+
+func updateScoreDisplay() -> void:
+	print('updateScoreDisplay Global.score: ', Global.score)
+	scoreLabel.text = str(Global.score)

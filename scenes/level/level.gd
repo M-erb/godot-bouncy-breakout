@@ -4,6 +4,7 @@ class_name Level extends Node2D
 @export var rows := 8
 
 signal lvlCleared
+signal scoreUpdate
 
 var brickCount:int = 0
 var ballRef := preload("res://scenes/ball/ball.tscn")
@@ -15,10 +16,10 @@ const TopLeftPos := Vector2(20, 20)
 const HORZ := 20
 const VERT := 10
 
+var ballList:Array[Ball] = []
+
 func _ready() -> void:
 	generateLvl()
-	
-	#shootBalls(Vector2(100,100), 10)
 
 func generateLvl() -> void:
 	for row in rows:
@@ -48,13 +49,20 @@ func generateLvl() -> void:
 	
 	print('brickCount count: ', brickCount)
 
-func brickDistroyed() -> void:
+func brickDistroyed(brick: Brick) -> void:
 	brickCount -= 1
-	#print('brickCount: ', brickCount)
+	if brick.points > 0:
+		print('updated score: ', ballList.size(), ' * ', brick.points)
+		Global.score += (ballList.size() + 1) * brick.points
+		print('Global.score: ', Global.score)
+		scoreUpdate.emit()
+	
+	#print('brickCount: ' , brickCount)
 	
 	if brickCount <= 0:
-		Global.lvlIndex += 1
+		await cleanupBalls()
 		lvlCleared.emit()
+		Global.lvlIndex += 1
 
 func shootBalls(pos: Vector2, ballNum: int) -> void:
 	for num in ballNum:
@@ -62,4 +70,12 @@ func shootBalls(pos: Vector2, ballNum: int) -> void:
 		ball.position = pos
 		ball.isTemp = true
 		ball.fly()
+		ballList.append(ball)
 		add_child(ball)
+
+func cleanupBalls() -> void:
+	for ball in ballList:
+		if ball.isTemp:
+			ball.queue_free()
+	
+	ballList.clear()

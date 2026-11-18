@@ -5,7 +5,7 @@ class_name BombBrick extends Brick
 func takeDamage() -> void:
 	if !isDead:
 		isDead = true
-		self.distroyed.emit()
+		self.distroyed.emit(self)
 		explodNeighbors()
 		queue_free()
 

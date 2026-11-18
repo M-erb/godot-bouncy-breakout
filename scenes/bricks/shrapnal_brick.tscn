@@ -6,6 +6,7 @@
 
 [node name="ShrapnalBrick" unique_id=1379360659 instance=ExtResource("1_ig2jl")]
 script = ExtResource("2_g8wg1")
+loadedBalls = 6
 
 [node name="Sprite2D" parent="." index="0" unique_id=1780196440]
 texture = ExtResource("3_3hhtb")

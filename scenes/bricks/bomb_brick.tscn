@@ -8,6 +8,7 @@
 
 [node name="BombBrick" unique_id=1379360659 instance=ExtResource("1_nj0ud")]
 script = ExtResource("2_v4v6b")
+points = 15
 
 [node name="Sprite2D" parent="." index="0" unique_id=1780196440]
 texture = ExtResource("2_l725b")

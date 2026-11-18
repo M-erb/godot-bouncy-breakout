@@ -7,8 +7,8 @@ signal explode(pos: Vector2, ballNum: int)
 func takeDamage() -> void:
 	if !isDead:
 		isDead = true
-		self.distroyed.emit()
-		shootBalls()
+		await shootBalls()
+		self.distroyed.emit(self)
 		queue_free()
 
 func shootBalls() -> void:
