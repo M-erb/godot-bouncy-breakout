@@ -5,6 +5,10 @@ class_name Ball extends CharacterBody2D
 @export var minAngle: float = 0.8
 @export var isTemp: bool = false
 
+@onready var breakAudio: AudioStreamPlayer = $BreakAudio
+@onready var paddleAudio: AudioStreamPlayer = $PaddleAudio
+@onready var wallAudio: AudioStreamPlayer = $WallAudio
+
 enum States {Docked, Flying, Hidden}
 var state: States = States.Docked
 
@@ -59,19 +63,22 @@ func handleFly(delta: float) -> void:
 		#if collider is Ball:
 			#return
 		
-		if collider is Paddle: 
+		if collider is Paddle:
 			var paddle: Paddle = collider
 			velocity = getVelFromPaddle(paddle)
+			paddleAudio.play()
 			return
 		
 		if collider is Brick:
 			var brick: Brick = collider
 			brick.takeDamage()
+			breakAudio.play()
 			velocity = velocity.bounce(objNormal)
 			fixShallowAngle()
 			return
 		
 		# if no rules then just bounce normally
+		wallAudio.play()
 		velocity = velocity.bounce(objNormal)
 
 func fixShallowAngle() -> void:

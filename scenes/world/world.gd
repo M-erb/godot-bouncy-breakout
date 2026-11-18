@@ -6,10 +6,12 @@ class_name World extends Node2D
 @export var mssgLabel: Label
 @export var lvl: Level
 @export var livesUI: LivesUI
+@export var bgMusic: AudioStreamPlayer
 
 func _ready() -> void:
 	if Bottom: Bottom.body_entered.connect(onBottomEntered)
-	if lvl: lvl.lvlCleared.connect(handleLvlCleared)
+	if bgMusic:
+		bgMusic.play()
 
 func onBottomEntered(body: Node2D) -> void:
 	if body is Ball and !body.isTemp:

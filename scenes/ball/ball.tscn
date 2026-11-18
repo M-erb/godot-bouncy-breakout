@@ -2,15 +2,30 @@
 
 [ext_resource type="Script" uid="uid://braw4i15xclw3" path="res://scenes/ball/ball.gd" id="1_nv6q1"]
 [ext_resource type="Texture2D" uid="uid://d0tpwj6r1wk3k" path="res://assets/textures/ball.png" id="1_oqv3d"]
+[ext_resource type="AudioStream" uid="uid://ksgh5a2plt64" path="res://assets/sounds/break.wav" id="3_stoaj"]
+[ext_resource type="AudioStream" uid="uid://dkongxo7knghv" path="res://assets/sounds/paddle-bounce.wav" id="4_xotqv"]
+[ext_resource type="AudioStream" uid="uid://btmx7fdyc2orm" path="res://assets/sounds/wall-bounce.wav" id="5_jbgth"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xwnao"]
 radius = 3.0
 
 [node name="Ball" type="CharacterBody2D" unique_id=2010255254]
+collision_layer = 2
 script = ExtResource("1_nv6q1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=271681895]
+visibility_layer = 2
 texture = ExtResource("1_oqv3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1540816864]
 shape = SubResource("CircleShape2D_xwnao")
+
+[node name="BreakAudio" type="AudioStreamPlayer" parent="." unique_id=1085738937]
+stream = ExtResource("3_stoaj")
+volume_db = -10.948
+
+[node name="PaddleAudio" type="AudioStreamPlayer" parent="." unique_id=1298799415]
+stream = ExtResource("4_xotqv")
+
+[node name="WallAudio" type="AudioStreamPlayer" parent="." unique_id=849447428]
+stream = ExtResource("5_jbgth")

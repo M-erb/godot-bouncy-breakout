@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dj3emr23t1u4o" path="res://assets/textures/background.png" id="1_1fp7r"]
 [ext_resource type="Script" uid="uid://dll8ksymyynbg" path="res://scenes/world/world.gd" id="1_v5dby"]
+[ext_resource type="AudioStream" uid="uid://c3il7l6kybtuj" path="res://assets/music/stage-02.mp3" id="2_1yooq"]
 [ext_resource type="PackedScene" uid="uid://crge7nu4y5y8" path="res://scenes/paddle/paddle.tscn" id="2_6m72w"]
 [ext_resource type="PackedScene" uid="uid://urbafqgvhkyp" path="res://scenes/ball/ball.tscn" id="3_v5dby"]
 [ext_resource type="Script" uid="uid://bt2pwltk3o1wx" path="res://scenes/level/level.gd" id="4_6m72w"]
@@ -63,6 +64,9 @@ animation = NodePath("AnimationPlayer")
 mssgLabel = NodePath("mssgLabel")
 lvl = NodePath("Level")
 livesUI = NodePath("LivesControl")
+bgMusic = NodePath("AudioStreamPlayer")
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2091482754]
+stream = ExtResource("2_1yooq")
 
 [node name="Bg" type="Sprite2D" parent="." unique_id=489520128]
 texture = ExtResource("1_1fp7r")
